@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Grid Monitor</title>
+    <style>
+        body {
+            background: #0d1117;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .device-card {
+            background: #161b22;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status {
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+        .up {
+            background: #2ea043;
+            color: black;
+        }
+        .down {
+            background: #f85149;
+            color: black;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <h1>⚡ Smart Grid Network Monitor</h1>
+    <div id="device-container"></div>
+
+    <canvas id="latencyChart" height="100"></canvas>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>

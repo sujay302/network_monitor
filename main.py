@@ -2,7 +2,18 @@ from fastapi import FastAPI
 import json
 import subprocess
 
+
 app = FastAPI()
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+def root():
+    return FileResponse("static/index.html")
+
 
 # Load devices from devices.json
 with open("devices.json", "r") as f:
