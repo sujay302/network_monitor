@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 import json
 import subprocess
+from datetime import datetime
+import random
 
 
 app = FastAPI()
@@ -15,12 +17,29 @@ def root():
     return FileResponse("static/index.html")
 
 
+
+@app.get("/api/latency")
+def get_latency():
+    return {
+        "timestamps": [
+            datetime.now().strftime("%H:%M:%S")
+            for _ in range(5)
+        ],
+        "latencies": [random.randint(10, 100) for _ in range(5)]
+    }
+
+
+
 # Load devices from devices.json
 with open("devices.json", "r") as f:
     DEVICES = json.load(f)
 
 def ping_device(ip):
-    """Ping a device and return True if reachable."""
+    """
+    Returns:
+    - status: UP / DOWN
+    - latency: response time in ms or None
+    """
     try:
         output = subprocess.run(
             ["ping", "-n", "1", ip],
@@ -28,9 +47,19 @@ def ping_device(ip):
             stderr=subprocess.PIPE,
             text=True
         )
-        return "TTL=" in output.stdout
+
+        if "TTL=" in output.stdout:
+            # Extract time=XXms
+            for line in output.stdout.split("\n"):
+                if "time=" in line:
+                    latency = line.split("time=")[1].split("ms")[0]
+                    return "UP", int(latency)
+            return "UP", None
+
+        return "DOWN", None
     except:
-        return False
+        return "DOWN", None
+
 
 
 @app.get("/devices")
@@ -48,10 +77,12 @@ def ping(ip: str):
 def get_status():
     results = []
     for device in DEVICES:
-        alive = ping_device(device["ip"])
+        status, latency = ping_device(device["ip"])
         results.append({
             "name": device["name"],
             "ip": device["ip"],
-            "status": "UP" if alive else "DOWN"
+            "status": status,
+            "latency": latency
         })
     return results
+
