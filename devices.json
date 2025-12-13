@@ -1,0 +1,21 @@
+[
+    {
+        "name": "SmartMeter-1",
+        "ip": "152.56.131.230"
+    },
+
+    {
+        "name": "SmartMeter-2",
+        "ip": "152.56.131.65"
+    },
+
+    {
+        "name":"SmartMeter-3",
+        "ip": "10.211.23.53"
+    },
+
+    {
+        "name": "Router-Gateway",
+        "ip": "10.211.23.29"
+    }
+]
