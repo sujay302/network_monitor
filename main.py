@@ -18,15 +18,15 @@ def root():
 
 
 
-@app.get("/api/latency")
-def get_latency():
-    return {
-        "timestamps": [
-            datetime.now().strftime("%H:%M:%S")
-            for _ in range(5)
-        ],
-        "latencies": [random.randint(10, 100) for _ in range(5)]
-    }
+#@app.get("/api/latency")
+#def get_latency():
+#    return {
+#        "timestamps": [
+#            datetime.now().strftime("%H:%M:%S")
+#            for _ in range(5)
+#        ],
+#        "latencies": [random.randint(10, 100) for _ in range(5)]
+#    }
 
 
 

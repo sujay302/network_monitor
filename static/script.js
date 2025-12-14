@@ -39,14 +39,17 @@ async function loadStatus() {
         `;
         container.appendChild(div);
 
+//the below commented lines generates random value for the graph to check if the graph is working properly
+/*
+
     if (d.status === "UP") {
         labels.push(new Date().toLocaleTimeString());
     latencyData.push(Math.floor(Math.random() * 100) + 10);
     latencyChart.update();
     }
+*/
 
 
-/*
         // Add latency to graph (only if UP)
     if (d.latency !== null) {
         labels.push(new Date().toLocaleTimeString());
@@ -59,7 +62,7 @@ async function loadStatus() {
 
         latencyChart.update();
     }
-*/
+
 
 
     });
